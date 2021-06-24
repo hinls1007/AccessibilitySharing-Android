@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/LoginFragment">
+
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.accessibilitytraining.android.flow.login.LoginFragment"
+        android:label="@string/login_page_title"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_LoginFragment_to_ListFragment"
+            app:destination="@id/ListFragment"
+            app:enterAnim="@anim/anim_native_push_enter"
+            app:exitAnim="@anim/anim_native_push_exit"
+            app:popEnterAnim="@anim/anim_native_pop_enter"
+            app:popExitAnim="@anim/anim_native_pop_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ListFragment"
+        android:name="com.accessibilitytraining.android.flow.list.ListFragment"
+        android:label="@string/list_page_title"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_ListFragment_to_DetailFragment"
+            app:destination="@id/DetailFragment"
+            app:enterAnim="@anim/anim_native_push_enter"
+            app:exitAnim="@anim/anim_native_push_exit"
+            app:popEnterAnim="@anim/anim_native_pop_enter"
+            app:popExitAnim="@anim/anim_native_pop_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DetailFragment"
+        android:name="com.accessibilitytraining.android.flow.detail.DetailFragment"
+        android:label="@string/detail_page_title"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="detailModel"
+            app:argType="com.accessibilitytraining.android.repository.ListDataResponse$ListDetailModel" />
+        <action
+            android:id="@+id/action_show_TooltipDialogFragment"
+            app:destination="@id/TooltipDialogFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/TooltipDialogFragment"
+        android:name="com.accessibilitytraining.android.flow.dialog.TooltipDialogFragment"
+        android:label="TooltipDialogFragment"
+        tools:layout="@layout/dialog_fragment_tooltip">
+        <argument
+            android:name="tooltipTitle"
+            app:argType="string" />
+        <argument
+            android:name="tooltipContent"
+            app:argType="string" />
+    </dialog>
+</navigation>

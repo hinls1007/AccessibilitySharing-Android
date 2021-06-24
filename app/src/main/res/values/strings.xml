@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Accessibility Training</string>
+    <string name="login_page_title">Login</string>
+    <string name="username_title">Username</string>
+    <string name="username_error_message">*Error, please enter 6 - 16 character</string>
+    <string name="password_title">Password</string>
+    <string name="login_button">Login</string>
+    <string name="list_page_title">List</string>
+    <string name="detail_page_title">Detail</string>
+    <string name="tooltip_description">Learn more</string>
+    <string name="common_login">Login</string>
+    <string name="common_loading">Loading</string>
+    <string name="common_back">Back</string>
+    <string name="common_close">Close</string>
+</resources>

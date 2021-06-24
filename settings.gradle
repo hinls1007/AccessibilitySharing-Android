@@ -1,0 +1,2 @@
+rootProject.name = "accessibilitytraining.android"
+include ':app'
