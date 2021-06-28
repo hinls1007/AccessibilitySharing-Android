@@ -20,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:labelFor="@id/etUsername"
         android:text="@string/username_title"
         android:textColor="@color/black"
         android:textSize="28sp"
@@ -37,6 +38,7 @@
         android:layout_height="wrap_content"
         android:text="@string/username_error_message"
         android:textColor="@android:color/holo_red_dark"
+        android:labelFor="@id/etPassword"
         android:textSize="20sp"
         android:visibility="gone"
         tools:visibility="visible" />

@@ -3,6 +3,7 @@ package com.accessibilitytraining.android.flow.detail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.accessibilitytraining.android.builder.AccessibilityBuilder
 import com.accessibilitytraining.android.databinding.ViewHolderImageBinding
 import com.accessibilitytraining.android.repository.ListDataResponse
 
@@ -34,8 +35,13 @@ class DetailAdapter : RecyclerView.Adapter<DetailAdapter.ImageViewHolder>() {
     class ImageViewHolder(private val itemBinding: ViewHolderImageBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun onBindView(imageData: ListDataResponse.ListImageModel) {
-            itemBinding.tvTitle.text = imageData.title
-            itemBinding.tvDate.text = imageData.date
+            with(imageData){
+                itemBinding.apply {
+                    tvTitle.text = title
+                    tvDate.text = date
+                    AccessibilityBuilder().setText(String.format("%s, %s", title, date)).build(vRow)
+                }
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.accessibilitytraining.android.R
 import com.accessibilitytraining.android.base.BaseFragment
+import com.accessibilitytraining.android.builder.AccessibilityBuilder
 import com.accessibilitytraining.android.databinding.FragmentDetailBinding
 import com.accessibilitytraining.android.repository.ListDataResponse
 
@@ -30,6 +31,7 @@ class DetailFragment : BaseFragment(), DetailContract.View {
         super.onViewCreated(view, savedInstanceState)
         mainActivity?.setActionBarData(
             leftButtonIconRes = R.drawable.ic_back,
+            leftButtonContentDescriptionRes = R.string.common_back,
             leftButtonClickListener = { findNavController().popBackStack() },
             titleRes = R.string.detail_page_title
         )
@@ -53,13 +55,34 @@ class DetailFragment : BaseFragment(), DetailContract.View {
 
     override fun setDetail(detailModel: DetailData) {
         binding?.apply {
-            tvTitle.text = detailModel.title
-            tvAmount.text = detailModel.amount
-            tvDate.text = detailModel.date
-            tvLabel1.text = detailModel.item1
-            tvLabel2.text = detailModel.item2
-            tvLabel3.text = detailModel.item3
-            tvLabel4.text = detailModel.item4
+            with(detailModel) {
+                tvTitle.text = title
+                tvAmount.text = amount
+                tvDate.text = date
+                tvLabel1.text = item1
+                tvLabel2.text = item2
+                tvLabel3.text = item3
+                tvLabel4.text = item4
+                AccessibilityBuilder()
+                    .setText(
+                        String.format("%s, %s, %s", title, amount, date)
+                    )
+                    .build(vDetail)
+
+                AccessibilityBuilder()
+                    .setText(
+                        String.format("%s, %s", item1, item2)
+                    )
+                    .build(vItem1n2)
+
+                AccessibilityBuilder()
+                    .setText(
+                        String.format("%s, %s", item3, item4)
+                    )
+                    .build(vItem3n4)
+            }
+
+
         }
     }
 

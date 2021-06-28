@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.accessibilitytraining.android.builder.AccessibilityBuilder
 import com.accessibilitytraining.android.databinding.ViewHolderHeaderBinding
 import com.accessibilitytraining.android.databinding.ViewHolderRowBinding
 import com.accessibilitytraining.android.databinding.ViewHolderRowWithCustomBinding
@@ -95,6 +96,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
                     it.detail?.let { detail ->
                         vRow.setOnClickListener { listAdapterClickListener?.onListClick(detail) }
+                        AccessibilityBuilder().setViewType(AccessibilityBuilder.ViewType.Button).build(vRow)
                         ivForward.visibility = View.VISIBLE
                     } ?: run {
                         ivForward.visibility = View.INVISIBLE
