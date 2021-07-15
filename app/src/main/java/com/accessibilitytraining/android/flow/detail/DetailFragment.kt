@@ -63,26 +63,7 @@ class DetailFragment : BaseFragment(), DetailContract.View {
                 tvLabel2.text = item2
                 tvLabel3.text = item3
                 tvLabel4.text = item4
-                AccessibilityBuilder()
-                    .setText(
-                        String.format("%s, %s, %s", title, amount, date)
-                    )
-                    .build(vDetail)
-
-                AccessibilityBuilder()
-                    .setText(
-                        String.format("%s, %s", item1, item2)
-                    )
-                    .build(vItem1n2)
-
-                AccessibilityBuilder()
-                    .setText(
-                        String.format("%s, %s", item3, item4)
-                    )
-                    .build(vItem3n4)
             }
-
-
         }
     }
 

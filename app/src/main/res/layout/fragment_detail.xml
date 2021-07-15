@@ -36,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="12dp"
                 android:layout_marginStart="30dp"
-                android:importantForAccessibility="no"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -74,7 +73,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:importantForAccessibility="no"
                 android:textColor="@color/grey_text"
                 app:layout_constraintBottom_toTopOf="@id/tvDate"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +89,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="12dp"
-                android:importantForAccessibility="no"
                 android:textColor="@color/grey_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +124,6 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLabel1"
-                    android:importantForAccessibility="no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -137,7 +133,6 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLabel2"
-                    android:importantForAccessibility="no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -165,7 +160,6 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLabel3"
-                    android:importantForAccessibility="no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -175,7 +169,6 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLabel4"
-                    android:importantForAccessibility="no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
