@@ -39,7 +39,6 @@ class DetailAdapter : RecyclerView.Adapter<DetailAdapter.ImageViewHolder>() {
                 itemBinding.apply {
                     tvTitle.text = title
                     tvDate.text = date
-                    AccessibilityBuilder().setText(String.format("%s, %s", title, date)).build(vRow)
                 }
             }
         }
