@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.accessibilitytraining.android.databinding.ViewHolderImageBinding
+import com.accessibilitytraining.android.extension.toDateContentDescription
 import com.accessibilitytraining.android.repository.ListDataResponse
 
 class DetailAdapter : RecyclerView.Adapter<DetailAdapter.ImageViewHolder>() {
@@ -35,7 +36,10 @@ class DetailAdapter : RecyclerView.Adapter<DetailAdapter.ImageViewHolder>() {
         RecyclerView.ViewHolder(itemBinding.root) {
         fun onBindView(imageData: ListDataResponse.ListImageModel) {
             itemBinding.tvTitle.text = imageData.title
-            itemBinding.tvDate.text = imageData.date
+            itemBinding.tvDate.apply {
+                text = imageData.date
+                contentDescription = imageData.date?.toDateContentDescription()
+            }
         }
     }
 }

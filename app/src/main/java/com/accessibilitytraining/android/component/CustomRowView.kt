@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.accessibilitytraining.android.databinding.CustomRowViewBinding
+import com.accessibilitytraining.android.extension.toDateContentDescription
 
 class CustomRowView @JvmOverloads constructor(
     context: Context,
@@ -21,7 +22,10 @@ class CustomRowView @JvmOverloads constructor(
         binding?.apply {
             tvTitle.text = title
             tvAmount.text = amount
-            tvDate.text = date
+            tvDate.apply {
+                text = date
+                contentDescription = date?.toDateContentDescription()
+            }
 
             onClickListener?.let {
                 ivForward.visibility = View.VISIBLE

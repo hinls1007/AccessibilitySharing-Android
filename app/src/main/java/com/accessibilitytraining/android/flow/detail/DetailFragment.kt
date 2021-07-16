@@ -1,5 +1,6 @@
 package com.accessibilitytraining.android.flow.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,16 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.accessibilitytraining.android.R
 import com.accessibilitytraining.android.base.BaseFragment
 import com.accessibilitytraining.android.databinding.FragmentDetailBinding
+import com.accessibilitytraining.android.extension.toDateContentDescription
 import com.accessibilitytraining.android.repository.ListDataResponse
 
 class DetailFragment : BaseFragment(), DetailContract.View {
     private var binding: FragmentDetailBinding? = null
     private val arguments: DetailFragmentArgs by navArgs()
     private val presenter = DetailPresenter()
+
+    override fun getAccessibilityPageTitle(context: Context) =
+        context.getString(R.string.detail_page_title)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +35,7 @@ class DetailFragment : BaseFragment(), DetailContract.View {
         super.onViewCreated(view, savedInstanceState)
         mainActivity?.setActionBarData(
             leftButtonIconRes = R.drawable.ic_back,
+            leftButtonContentDescriptionRes = R.string.common_back,
             leftButtonClickListener = { findNavController().popBackStack() },
             titleRes = R.string.detail_page_title
         )
@@ -55,7 +61,10 @@ class DetailFragment : BaseFragment(), DetailContract.View {
         binding?.apply {
             tvTitle.text = detailModel.title
             tvAmount.text = detailModel.amount
-            tvDate.text = detailModel.date
+            tvDate.apply {
+                text = detailModel.date
+                contentDescription = detailModel.date?.toDateContentDescription()
+            }
             tvLabel1.text = detailModel.item1
             tvLabel2.text = detailModel.item2
             tvLabel3.text = detailModel.item3

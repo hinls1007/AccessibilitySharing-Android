@@ -1,5 +1,6 @@
 package com.accessibilitytraining.android.flow.list
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,9 @@ import com.accessibilitytraining.android.repository.ListDataResponse
 class ListFragment : BaseFragment(), ListContract.View {
     private var binding: FragmentListBinding? = null
     private lateinit var presenter: ListContract.Presenter
+
+    override fun getAccessibilityPageTitle(context: Context) =
+        context.getString(R.string.list_page_title)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +36,7 @@ class ListFragment : BaseFragment(), ListContract.View {
         super.onViewCreated(view, savedInstanceState)
         mainActivity?.setActionBarData(
             leftButtonIconRes = R.drawable.ic_back,
+            leftButtonContentDescriptionRes = R.string.common_back,
             leftButtonClickListener = { findNavController().popBackStack() },
             titleRes = R.string.list_page_title
         )
@@ -52,7 +57,10 @@ class ListFragment : BaseFragment(), ListContract.View {
     }
 
     override fun showLoading() {
-        binding?.vLoading?.visibility = View.VISIBLE
+        binding?.vLoading?.apply {
+            visibility = View.VISIBLE
+            announceForAccessibility(getString(R.string.common_loading))
+        }
     }
 
     override fun hideLoading() {

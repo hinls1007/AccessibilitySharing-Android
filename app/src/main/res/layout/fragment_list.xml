@@ -10,6 +10,7 @@
         android:id="@+id/rvList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
         android:overScrollMode="never"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -22,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/grey_background"
+        android:contentDescription="@string/common_loading"
         android:gravity="center"
         android:orientation="vertical"
         tools:visibility="gone">
@@ -31,7 +33,8 @@
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:importantForAccessibility="no" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </FrameLayout>

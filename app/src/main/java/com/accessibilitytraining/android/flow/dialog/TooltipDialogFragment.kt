@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.navArgs
 import com.accessibilitytraining.android.databinding.DialogFragmentTooltipBinding
+import com.accessibilitytraining.android.helper.asHeading
+import com.accessibilitytraining.android.helper.buildAccessibilityDelegate
 
 class TooltipDialogFragment : DialogFragment() {
     private var binding: DialogFragmentTooltipBinding? = null
@@ -20,6 +22,7 @@ class TooltipDialogFragment : DialogFragment() {
          * if didn't set a dialog title(null or empty string), with consider first focusable element as the title
          * if dialog title same as tvTitle, will skip tvTitle focus
          */
+        dialog?.setTitle(arguments.tooltipTitle + " ")
         dialog?.window?.apply {
             setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -42,10 +45,16 @@ class TooltipDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
-            tvTitle.text = arguments.tooltipTitle
+            tvTitle.apply {
+                text = arguments.tooltipTitle
+                asHeading()
+            }
             tvContent.text = arguments.tooltipContent
-            ivClose.setOnClickListener {
-                dismiss()
+            ivClose.apply {
+                setOnClickListener {
+                    dismiss()
+                }
+                buildAccessibilityDelegate(traversalAfter = tvContent)
             }
         }
     }
