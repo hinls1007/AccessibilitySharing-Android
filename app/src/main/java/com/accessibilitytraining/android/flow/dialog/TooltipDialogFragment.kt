@@ -1,5 +1,6 @@
 package com.accessibilitytraining.android.flow.dialog
 
+import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -48,5 +49,11 @@ class TooltipDialogFragment : DialogFragment() {
                 dismiss()
             }
         }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = Dialog(requireContext(), theme)
+        dialog.setTitle(arguments.tooltipTitle)
+        return dialog
     }
 }

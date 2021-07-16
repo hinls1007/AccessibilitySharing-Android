@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.accessibilitytraining.android.builder.AccessibilityBuilder
 import com.accessibilitytraining.android.databinding.CustomRowViewBinding
 
 class CustomRowView @JvmOverloads constructor(
@@ -28,6 +29,7 @@ class CustomRowView @JvmOverloads constructor(
                 rootView.setOnClickListener {
                     onClickListener.invoke()
                 }
+                AccessibilityBuilder().setViewType(AccessibilityBuilder.ViewType.Button).build(this@CustomRowView)
             } ?: run {
                 ivForward.visibility = View.INVISIBLE
             }

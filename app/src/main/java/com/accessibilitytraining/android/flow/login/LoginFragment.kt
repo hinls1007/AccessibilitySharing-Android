@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.accessibilitytraining.android.R
 import com.accessibilitytraining.android.base.BaseFragment
+import com.accessibilitytraining.android.builder.AccessibilityBuilder
 import com.accessibilitytraining.android.databinding.FragmentLoginBinding
 
 class LoginFragment : BaseFragment(), LoginContract.View {
@@ -27,16 +28,35 @@ class LoginFragment : BaseFragment(), LoginContract.View {
             titleRes = R.string.login_page_title
         )
 
-        binding?.btnLogin?.setOnClickListener {
-            presenter.checkLoginInfo(
-                binding?.etUsername?.text,
-                binding?.etPassword?.text
-            )
+        binding?.btnLogin?.apply {
+            setOnClickListener {
+                presenter.checkLoginInfo(
+                    binding?.etUsername?.text,
+                    binding?.etPassword?.text
+                )
+            }
+            AccessibilityBuilder().setClickActionLabel(getString(R.string.login_button)).build(this)
         }
+
+        binding?.etUsername?.apply {
+            AccessibilityBuilder()
+                .setText("")
+                .build(this)
+        }
+
+        binding?.etPassword?.apply {
+            AccessibilityBuilder()
+                .setText("")
+                .build(this)
+        }
+
     }
 
     override fun showErrorMessage() {
-        binding?.tvUsernameErrorMsg?.visibility = View.VISIBLE
+        with(binding?.tvUsernameErrorMsg) {
+            this?.visibility = View.VISIBLE
+            this?.announceForAccessibility(getString(R.string.username_error_message))
+        }
     }
 
     override fun routeToListPage() {

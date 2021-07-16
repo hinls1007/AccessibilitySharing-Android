@@ -6,6 +6,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.accessibilitytraining.android.builder.AccessibilityBuilder
 import com.accessibilitytraining.android.databinding.ActivityMainBinding
 import com.accessibilitytraining.android.extension.getResString
 
@@ -21,10 +22,12 @@ class MainActivity : AppCompatActivity() {
 
     fun setActionBarData(
         @DrawableRes leftButtonIconRes: Int? = null,
+        @StringRes leftButtonContentDescriptionRes: Int? = null,
         leftButtonClickListener: View.OnClickListener? = null,
         @StringRes titleRes: Int? = null,
         title: CharSequence? = null,
         @DrawableRes rightButtonIconRes: Int? = null,
+        @StringRes rightButtonContentDescriptionRes: Int? = null,
         rightButtonClickListener: View.OnClickListener? = null,
     ) {
         binding.leftIcon.apply {
@@ -34,6 +37,9 @@ class MainActivity : AppCompatActivity() {
                 visibility = View.VISIBLE
             } ?: run {
                 visibility = View.INVISIBLE
+            }
+            leftButtonContentDescriptionRes?.let {
+                contentDescription = getString(it)
             }
         }
 
@@ -45,8 +51,18 @@ class MainActivity : AppCompatActivity() {
             } ?: run {
                 visibility = View.INVISIBLE
             }
+
+            rightButtonContentDescriptionRes?.let {
+                contentDescription = getString(it)
+            }
         }
 
-        binding.tvTitle.text = getResString(titleRes, title)
+        binding.tvTitle.apply {
+            text = getResString(titleRes, title)
+            AccessibilityBuilder()
+                .setViewType(AccessibilityBuilder.ViewType.Heading)
+                .build(this)
+        }
     }
+
 }

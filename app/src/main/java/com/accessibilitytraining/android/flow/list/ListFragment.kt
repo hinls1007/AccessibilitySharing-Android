@@ -32,6 +32,7 @@ class ListFragment : BaseFragment(), ListContract.View {
         super.onViewCreated(view, savedInstanceState)
         mainActivity?.setActionBarData(
             leftButtonIconRes = R.drawable.ic_back,
+            leftButtonContentDescriptionRes = R.string.common_back,
             leftButtonClickListener = { findNavController().popBackStack() },
             titleRes = R.string.list_page_title
         )
@@ -52,7 +53,10 @@ class ListFragment : BaseFragment(), ListContract.View {
     }
 
     override fun showLoading() {
-        binding?.vLoading?.visibility = View.VISIBLE
+        binding?.vLoading?.apply {
+            visibility = View.VISIBLE
+            announceForAccessibility(getString(R.string.common_loading))
+        }
     }
 
     override fun hideLoading() {
