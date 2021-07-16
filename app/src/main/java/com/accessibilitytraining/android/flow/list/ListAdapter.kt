@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.accessibilitytraining.android.databinding.ViewHolderHeaderBinding
 import com.accessibilitytraining.android.databinding.ViewHolderRowBinding
 import com.accessibilitytraining.android.databinding.ViewHolderRowWithCustomBinding
+import com.accessibilitytraining.android.extension.toDateContentDescription
+import com.accessibilitytraining.android.helper.asButton
+import com.accessibilitytraining.android.helper.asHeading
 import com.accessibilitytraining.android.repository.ListDataResponse
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
@@ -80,7 +83,12 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
     class HeaderViewHolder(private val itemBinding: ViewHolderHeaderBinding) :
         ViewHolder(itemBinding.root) {
         override fun onBindView(listData: ListData) {
-            itemBinding.tvHeader.text = (listData as? ListData.Header)?.headerTitle
+            (listData as? ListData.Header)?.let {
+                itemBinding.tvHeader.apply {
+                    text = it.headerTitle
+                    asHeading()
+                }
+            }
         }
     }
 
@@ -91,9 +99,13 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
                 itemBinding.apply {
                     tvTitle.text = it.title
                     tvAmount.text = it.amount
-                    tvDate.text = it.date
+                    tvDate.apply {
+                        text = it.date
+                        contentDescription = it.date?.toDateContentDescription()
+                    }
 
                     it.detail?.let { detail ->
+                        vRow.asButton()
                         vRow.setOnClickListener { listAdapterClickListener?.onListClick(detail) }
                         ivForward.visibility = View.VISIBLE
                     } ?: run {
@@ -109,6 +121,9 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
         override fun onBindView(listData: ListData) {
             (listData as? ListData.Row)?.let { rowData ->
                 itemBinding.vCustomRowView.apply {
+                    rowData.detail?.let {
+                        asButton()
+                    }
                     setData(
                         title = rowData.title,
                         amount = rowData.amount,

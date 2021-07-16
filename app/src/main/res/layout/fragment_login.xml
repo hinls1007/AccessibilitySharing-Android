@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
+        android:importantForAccessibility="no"
         android:src="@drawable/bacteria" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -20,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:labelFor="@id/etUsername"
         android:text="@string/username_title"
         android:textColor="@color/black"
         android:textSize="28sp"
@@ -46,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:labelFor="@id/etPassword"
         android:text="@string/password_title"
         android:textColor="@color/black"
         android:textSize="28sp"

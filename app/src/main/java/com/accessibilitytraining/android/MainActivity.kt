@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.accessibilitytraining.android.databinding.ActivityMainBinding
 import com.accessibilitytraining.android.extension.getResString
+import com.accessibilitytraining.android.helper.buildAccessibilityDelegate
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -21,18 +22,28 @@ class MainActivity : AppCompatActivity() {
 
     fun setActionBarData(
         @DrawableRes leftButtonIconRes: Int? = null,
+        @StringRes leftButtonContentDescriptionRes: Int? = null,
+        leftButtonContentDescription: String? = null,
         leftButtonClickListener: View.OnClickListener? = null,
         @StringRes titleRes: Int? = null,
         title: CharSequence? = null,
         @DrawableRes rightButtonIconRes: Int? = null,
+        @StringRes rightButtonContentDescriptionRes: Int? = null,
+        rightButtonContentDescription: String? = null,
         rightButtonClickListener: View.OnClickListener? = null,
     ) {
         binding.leftIcon.apply {
             leftButtonIconRes?.let {
                 setImageResource(leftButtonIconRes)
+                importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+                contentDescription = getResString(
+                    leftButtonContentDescriptionRes,
+                    leftButtonContentDescription
+                )
                 setOnClickListener(leftButtonClickListener)
                 visibility = View.VISIBLE
             } ?: run {
+                importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
                 visibility = View.INVISIBLE
             }
         }
@@ -40,13 +51,26 @@ class MainActivity : AppCompatActivity() {
         binding.rightIcon.apply {
             rightButtonIconRes?.let {
                 setImageResource(rightButtonIconRes)
+                importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+                contentDescription = getResString(
+                    rightButtonContentDescriptionRes,
+                    rightButtonContentDescription
+                )
                 setOnClickListener(rightButtonClickListener)
                 visibility = View.VISIBLE
             } ?: run {
+                importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
                 visibility = View.INVISIBLE
             }
         }
 
-        binding.tvTitle.text = getResString(titleRes, title)
+        getResString(titleRes, title)?.let { titleString ->
+            binding.tvTitle.apply {
+                text = titleString
+                buildAccessibilityDelegate(isHeading = true)
+            }
+        } ?: run {
+            binding.tvTitle.text = null
+        }
     }
 }
